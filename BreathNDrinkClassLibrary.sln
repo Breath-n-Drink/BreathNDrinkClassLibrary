@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreathNDrinkClassLibrary", "BreathNDrinkClassLibrary.csproj", "{995A5024-75A2-46D4-9560-1516EE31DDDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{995A5024-75A2-46D4-9560-1516EE31DDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{995A5024-75A2-46D4-9560-1516EE31DDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{995A5024-75A2-46D4-9560-1516EE31DDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{995A5024-75A2-46D4-9560-1516EE31DDDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02232CC0-2C50-49B2-8B8D-C1CB1F599534}
+	EndGlobalSection
+EndGlobal
