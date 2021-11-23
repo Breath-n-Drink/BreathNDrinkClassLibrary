@@ -14,7 +14,7 @@ namespace BreathNDrinkClassLibrary
         private string _instructions;
         private string _imgThumbUrl;
         private List<string> _ingredientList = new ();
-        private List<string> _measurementList = new();
+        private List<string> _measurementList = new ();
 
         public string DrinkId
         {
@@ -73,6 +73,28 @@ namespace BreathNDrinkClassLibrary
             set
             {
                 _imgThumbUrl = value;
+            }
+        }
+
+        public List<string> IngredientList
+        {
+            get
+            {
+                return _ingredientList;
+            }
+            set
+            {
+            }
+        }
+
+        public List<string> MeasurementList
+        {
+            get
+            {
+                return _measurementList;
+            }
+            set
+            {
             }
         }
 
