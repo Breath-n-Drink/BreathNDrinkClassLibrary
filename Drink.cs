@@ -143,6 +143,12 @@ namespace BreathNDrinkClassLibrary
                             if (int.TryParse(stringArrayInArray[0], out int beforeDash) && int.TryParse(stringArrayInArray[1], out int afterDash))
                                 value += beforeDash + (afterDash - beforeDash)/2;
                         }
+                        else if (component.Contains('.'))
+                        {
+                            stringArrayInArray = component.Split('.');
+                            if (int.TryParse(stringArrayInArray[0], out int beforeDot) && int.TryParse(stringArrayInArray[1], out int afterDot))
+                                value += beforeDot + double.Parse("0." + afterDot);
+                        }
                         else if (component.ToLower().Equals("oz"))
                             unit = "oz";
                         else if (component.ToLower().Equals("cup"))
@@ -153,6 +159,10 @@ namespace BreathNDrinkClassLibrary
                             unit = "tbsp";
                         else if (component.ToLower().Equals("juice"))
                             unit = "juice";
+                        else if (component.ToLower().Equals("dash") || component.ToLower().Equals("dashes"))
+                            unit = "dash";
+                        else if (component.ToLower().Equals("cl"))
+                            unit = "cl";
                     }
 
                     double amountInMl;
@@ -175,6 +185,9 @@ namespace BreathNDrinkClassLibrary
                             break;
                         case "dash":
                             amountInMl = value * 1.0;
+                            break;
+                        case "cl":
+                            amountInMl = value * 10.0;
                             break;
                         default:
                             amountInMl = 0.0;
@@ -238,6 +251,24 @@ namespace BreathNDrinkClassLibrary
                         break;
                     case "creme de cacao":
                         alcoholByVol = 0.245;
+                        break;
+                    case "blended whiskey":
+                        alcoholByVol = 0.245;
+                        break;
+                    case "dry vermouth":
+                        alcoholByVol = 0.18;
+                        break;
+                    case "blackberry brandy":
+                        alcoholByVol = 0.35;
+                        break;
+                    case "kummel":
+                        alcoholByVol = 0.38;
+                        break;
+                    case "dark rum":
+                        alcoholByVol = 0.43;
+                        break;
+                    case "kahlua":
+                        alcoholByVol = 0.2;
                         break;
                     default:
                         alcoholByVol = 0.0;
