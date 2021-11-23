@@ -151,6 +151,8 @@ namespace BreathNDrinkClassLibrary
                             unit = "tsp";
                         else if (component.ToLower().Equals("tbsp"))
                             unit = "tbsp";
+                        else if (component.ToLower().Equals("juice"))
+                            unit = "juice";
                     }
 
                     double amountInMl;
@@ -168,6 +170,12 @@ namespace BreathNDrinkClassLibrary
                         case "tbsp":
                             amountInMl = value * 17.75816;
                             break;
+                        case "juice":
+                            amountInMl = value * 71.03266;
+                            break;
+                        case "dash":
+                            amountInMl = value * 1.0;
+                            break;
                         default:
                             amountInMl = 0.0;
                             break;
@@ -184,25 +192,52 @@ namespace BreathNDrinkClassLibrary
                 switch (ingredient.ToLower())
                 {
                     case "tequila":
-                        alcoholByVol = 0.45;
-                        break;
-                    case "triple sec":
-                        alcoholByVol = 0.3;
-                        break;
-                    case "light rum":
                         alcoholByVol = 0.4;
                         break;
+                    case "triple sec":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "light rum":
+                        alcoholByVol = 0.375;
+                        break;
                     case "gin":
-                        alcoholByVol = 0.45;
+                        alcoholByVol = 0.46;
                         break;
                     case "campari":
                         alcoholByVol = 0.25;
                         break;
                     case "sweet vermouth":
-                        alcoholByVol = 0.15;
+                        alcoholByVol = 0.16;
                         break;
                     case "vodka":
                         alcoholByVol = 0.4;
+                        break;
+                    case "angostura bitters":
+                        alcoholByVol = 0.447;
+                        break;
+                    case "bourbon":
+                        alcoholByVol = 0.482;
+                        break;
+                    case "apricot brandy":
+                        alcoholByVol = 0.28;
+                        break;
+                    case "amaretto":
+                        alcoholByVol = 0.28;
+                        break;
+                    case "southern comfort":
+                        alcoholByVol = 0.35;
+                        break;
+                    case "sloe gin":
+                        alcoholByVol = 0.28;
+                        break;
+                    case "orange bitters":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "yellow chartreuse":
+                        alcoholByVol = 0.43;
+                        break;
+                    case "creme de cacao":
+                        alcoholByVol = 0.245;
                         break;
                     default:
                         alcoholByVol = 0.0;
