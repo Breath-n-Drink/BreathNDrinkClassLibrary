@@ -128,10 +128,21 @@ namespace BreathNDrinkClassLibrary
                     string unit = "";
                     foreach (string component in strArray)
                     {
+                        string[] stringArrayInArray = Array.Empty<string>();
                         if (int.TryParse(component, out int result))
                             value += result;
-                        else if (component.Equals("1/2"))
-                            value += 0.5;
+                        else if (component.Contains('/'))
+                        {
+                            stringArrayInArray = component.Split('/');
+                            if (int.TryParse(stringArrayInArray[0], out int beforeSlash) && int.TryParse(stringArrayInArray[1], out int afterSlash))
+                                value += beforeSlash / (double)afterSlash;
+                        }
+                        else if (component.Contains('-'))
+                        {
+                            stringArrayInArray = component.Split('-');
+                            if (int.TryParse(stringArrayInArray[0], out int beforeDash) && int.TryParse(stringArrayInArray[1], out int afterDash))
+                                value += beforeDash + (afterDash - beforeDash)/2;
+                        }
                         else if (component.ToLower().Equals("oz"))
                             unit = "oz";
                         else if (component.ToLower().Equals("cup"))
