@@ -153,7 +153,7 @@ namespace BreathNDrinkClassLibrary
                             unit = "tbsp";
                     }
 
-                    double amountInMl = 0.0;
+                    double amountInMl;
                     switch (unit)
                     {
                         case "oz":
@@ -168,6 +168,9 @@ namespace BreathNDrinkClassLibrary
                         case "tbsp":
                             amountInMl = value * 17.75816;
                             break;
+                        default:
+                            amountInMl = 0.0;
+                            break;
                     }
 
                     measurementsInMl.Add(amountInMl);
@@ -177,7 +180,7 @@ namespace BreathNDrinkClassLibrary
             List<double> alcoholByVolList = new();
             foreach (string ingredient in _ingredientList)
             {
-                double alcoholByVol = 0.0;
+                double alcoholByVol;
                 switch (ingredient.ToLower())
                 {
                     case "tequila":
@@ -187,6 +190,18 @@ namespace BreathNDrinkClassLibrary
                         alcoholByVol = 0.3;
                         break;
                     case "light rum":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "gin":
+                        alcoholByVol = 0.45;
+                        break;
+                    case "campari":
+                        alcoholByVol = 0.25;
+                        break;
+                    case "sweet vermouth":
+                        alcoholByVol = 0.15;
+                        break;
+                    case "vodka":
                         alcoholByVol = 0.4;
                         break;
                     default:
