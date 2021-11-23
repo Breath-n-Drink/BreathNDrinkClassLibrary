@@ -136,6 +136,10 @@ namespace BreathNDrinkClassLibrary
                             unit = "oz";
                         else if (component.ToLower().Equals("cup"))
                             unit = "cup";
+                        else if (component.ToLower().Equals("tsp"))
+                            unit = "tsp";
+                        else if (component.ToLower().Equals("tbsp"))
+                            unit = "tbsp";
                     }
 
                     double amountInMl = 0.0;
@@ -146,6 +150,12 @@ namespace BreathNDrinkClassLibrary
                             break;
                         case "cup":
                             amountInMl = value * 284.1306;
+                            break;
+                        case "tsp":
+                            amountInMl = value * 5.919388;
+                            break;
+                        case "tbsp":
+                            amountInMl = value * 17.75816;
                             break;
                     }
 
@@ -165,7 +175,10 @@ namespace BreathNDrinkClassLibrary
                     case "triple sec":
                         alcoholByVol = 0.3;
                         break;
-                    case "lime juice":
+                    case "light rum":
+                        alcoholByVol = 0.4;
+                        break;
+                    default:
                         alcoholByVol = 0.0;
                         break;
                 }
