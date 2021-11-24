@@ -119,6 +119,9 @@ namespace BreathNDrinkClassLibrary
         {
             List<double> measurementsInMl = new();
 
+            if (Alcoholic == false)
+                return 0.0;
+
             foreach (string measurement in _measurementList)
             {
                 if (measurement != null)
@@ -165,6 +168,8 @@ namespace BreathNDrinkClassLibrary
                             unit = "cl";
                         else if (component.ToLower().Equals("shot") || component.ToLower().Equals("shots"))
                             unit = "shot";
+                        else if (component.ToLower().Equals("part") || component.ToLower().Equals("parts"))
+                            unit = "part";
                     }
 
                     double amountInMl;
@@ -194,8 +199,11 @@ namespace BreathNDrinkClassLibrary
                         case "shot":
                             amountInMl = value * 44.0;
                             break;
+                        case "part":
+                            amountInMl = value * 1.0;
+                            break;
                         default:
-                            amountInMl = 0.0;
+                            amountInMl = value * 1.0;
                             break;
                     }
 
@@ -228,6 +236,7 @@ namespace BreathNDrinkClassLibrary
                         alcoholByVol = 0.16;
                         break;
                     case "vodka":
+                    case "absolut vodka":
                         alcoholByVol = 0.4;
                         break;
                     case "angostura bitters":
@@ -274,6 +283,55 @@ namespace BreathNDrinkClassLibrary
                         break;
                     case "kahlua":
                         alcoholByVol = 0.2;
+                        break;
+                    case "galliano":
+                        alcoholByVol = 0.423;
+                        break;
+                    case "grand marnier":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "baileys irish cream":
+                        alcoholByVol = 0.17;
+                        break;
+                    case "creme de cassis":
+                        alcoholByVol = 0.2;
+                        break;
+                    case "champagne":
+                        alcoholByVol = 0.12;
+                        break;
+                    case "frangelico":
+                        alcoholByVol = 0.2;
+                        break;
+                    case "151 proof rum":
+                        alcoholByVol = 0.755;
+                        break;
+                    case "wild turkey":
+                        alcoholByVol = 0.505;
+                        break;
+                    case "sambuca":
+                        alcoholByVol = 0.38;
+                        break;
+                    case "whiskey":
+                    case "whisky":
+                        alcoholByVol = 0.43;
+                        break;
+                    case "peach schnapps":
+                        alcoholByVol = 0.2;
+                        break;
+                    case "red wine":
+                        alcoholByVol = 0.14;
+                        break;
+                    case "applejack":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "peach bitters":
+                        alcoholByVol = 0.39;
+                        break;
+                    case "grain alcohol":
+                        alcoholByVol = 0.95;
+                        break;
+                    case "vanilla vodka":
+                        alcoholByVol = 0.375;
                         break;
                     default:
                         alcoholByVol = 0.0;
