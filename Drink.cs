@@ -163,6 +163,8 @@ namespace BreathNDrinkClassLibrary
                             unit = "dash";
                         else if (component.ToLower().Equals("cl"))
                             unit = "cl";
+                        else if (component.ToLower().Equals("shot") || component.ToLower().Equals("shots"))
+                            unit = "shot";
                     }
 
                     double amountInMl;
@@ -188,6 +190,9 @@ namespace BreathNDrinkClassLibrary
                             break;
                         case "cl":
                             amountInMl = value * 10.0;
+                            break;
+                        case "shot":
+                            amountInMl = value * 44.0;
                             break;
                         default:
                             amountInMl = 0.0;
@@ -283,6 +288,9 @@ namespace BreathNDrinkClassLibrary
             {
                 totalVol += measurement;
             }
+
+            if (totalVol == 0.0)
+                return -1.0;
 
             double totalAlcVol = 0.0;
             int measurementNo = 0;
