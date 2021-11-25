@@ -109,6 +109,28 @@ namespace BreathNDrinkClassLibrary
             }
         }
 
+        public double TotalVolume
+        {
+            get
+            {
+                return CalculateTotalVolume();
+            }
+            set
+            {
+            }
+        }
+
+        public double TotalAlcVolume
+        {
+            get
+            {
+                return CalculateAlcoholPercentage() * CalculateTotalVolume();
+            }
+            set
+            {
+            }
+        }
+
         public void AddIngredientAndMeasurement(string ingredient, string measurement)
         {
             _ingredientList.Add(ingredient);
@@ -117,99 +139,10 @@ namespace BreathNDrinkClassLibrary
 
         private double CalculateAlcoholPercentage()
         {
-            List<double> measurementsInMl = new();
-
             if (Alcoholic == false)
                 return 0.0;
 
-            foreach (string measurement in _measurementList)
-            {
-                if (measurement != null)
-                {
-                    string[] strArray = measurement.Split(' ');
-                    double value = 0.0;
-                    string unit = "";
-                    foreach (string component in strArray)
-                    {
-                        string[] stringArrayInArray = Array.Empty<string>();
-                        if (int.TryParse(component, out int result))
-                            value += result;
-                        else if (component.Contains('/'))
-                        {
-                            stringArrayInArray = component.Split('/');
-                            if (int.TryParse(stringArrayInArray[0], out int beforeSlash) && int.TryParse(stringArrayInArray[1], out int afterSlash))
-                                value += beforeSlash / (double)afterSlash;
-                        }
-                        else if (component.Contains('-'))
-                        {
-                            stringArrayInArray = component.Split('-');
-                            if (int.TryParse(stringArrayInArray[0], out int beforeDash) && int.TryParse(stringArrayInArray[1], out int afterDash))
-                                value += beforeDash + (afterDash - beforeDash)/2;
-                        }
-                        else if (component.Contains('.'))
-                        {
-                            stringArrayInArray = component.Split('.');
-                            if (int.TryParse(stringArrayInArray[0], out int beforeDot) && int.TryParse(stringArrayInArray[1], out int afterDot))
-                                value += beforeDot + double.Parse("0." + afterDot);
-                        }
-                        else if (component.ToLower().Equals("oz"))
-                            unit = "oz";
-                        else if (component.ToLower().Equals("cup"))
-                            unit = "cup";
-                        else if (component.ToLower().Equals("tsp"))
-                            unit = "tsp";
-                        else if (component.ToLower().Equals("tbsp"))
-                            unit = "tbsp";
-                        else if (component.ToLower().Equals("juice"))
-                            unit = "juice";
-                        else if (component.ToLower().Equals("dash") || component.ToLower().Equals("dashes"))
-                            unit = "dash";
-                        else if (component.ToLower().Equals("cl"))
-                            unit = "cl";
-                        else if (component.ToLower().Equals("shot") || component.ToLower().Equals("shots"))
-                            unit = "shot";
-                        else if (component.ToLower().Equals("part") || component.ToLower().Equals("parts"))
-                            unit = "part";
-                    }
-
-                    double amountInMl;
-                    switch (unit)
-                    {
-                        case "oz":
-                            amountInMl = value * 28.41306;
-                            break;
-                        case "cup":
-                            amountInMl = value * 284.1306;
-                            break;
-                        case "tsp":
-                            amountInMl = value * 5.919388;
-                            break;
-                        case "tbsp":
-                            amountInMl = value * 17.75816;
-                            break;
-                        case "juice":
-                            amountInMl = value * 71.03266;
-                            break;
-                        case "dash":
-                            amountInMl = value * 1.0;
-                            break;
-                        case "cl":
-                            amountInMl = value * 10.0;
-                            break;
-                        case "shot":
-                            amountInMl = value * 44.0;
-                            break;
-                        case "part":
-                            amountInMl = value * 1.0;
-                            break;
-                        default:
-                            amountInMl = value * 1.0;
-                            break;
-                    }
-
-                    measurementsInMl.Add(amountInMl);
-                }
-            }
+            List<double> measurementsInMl = ConvertListToMl();
 
             List<double> alcoholByVolList = new();
             foreach (string ingredient in _ingredientList)
@@ -362,6 +295,118 @@ namespace BreathNDrinkClassLibrary
             }
 
             return totalAlcVol / totalVol;
+        }
+
+        private double CalculateTotalVolume()
+        {
+            List<double> measurementsInMl = ConvertListToMl();
+
+            double totalVol = 0.0;
+            foreach (double measurement in measurementsInMl)
+            {
+                totalVol += measurement;
+            }
+
+            if (totalVol <= 20.0)
+                return -1.0;
+
+            return totalVol;
+        }
+
+        private List<double> ConvertListToMl()
+        {
+            List<double> measurementsInMl = new();
+
+            foreach (string measurement in _measurementList)
+            {
+                if (measurement != null)
+                {
+                    string[] strArray = measurement.Split(' ');
+                    double value = 0.0;
+                    string unit = "";
+                    foreach (string component in strArray)
+                    {
+                        string[] stringArrayInArray = Array.Empty<string>();
+                        if (int.TryParse(component, out int result))
+                            value += result;
+                        else if (component.Contains('/'))
+                        {
+                            stringArrayInArray = component.Split('/');
+                            if (int.TryParse(stringArrayInArray[0], out int beforeSlash) && int.TryParse(stringArrayInArray[1], out int afterSlash))
+                                value += beforeSlash / (double)afterSlash;
+                        }
+                        else if (component.Contains('-'))
+                        {
+                            stringArrayInArray = component.Split('-');
+                            if (int.TryParse(stringArrayInArray[0], out int beforeDash) && int.TryParse(stringArrayInArray[1], out int afterDash))
+                                value += beforeDash + (afterDash - beforeDash) / 2;
+                        }
+                        else if (component.Contains('.'))
+                        {
+                            stringArrayInArray = component.Split('.');
+                            if (int.TryParse(stringArrayInArray[0], out int beforeDot) && int.TryParse(stringArrayInArray[1], out int afterDot))
+                                value += beforeDot + double.Parse("0." + afterDot);
+                        }
+                        else if (component.ToLower().Equals("oz"))
+                            unit = "oz";
+                        else if (component.ToLower().Equals("cup"))
+                            unit = "cup";
+                        else if (component.ToLower().Equals("tsp"))
+                            unit = "tsp";
+                        else if (component.ToLower().Equals("tbsp"))
+                            unit = "tbsp";
+                        else if (component.ToLower().Equals("juice"))
+                            unit = "juice";
+                        else if (component.ToLower().Equals("dash") || component.ToLower().Equals("dashes"))
+                            unit = "dash";
+                        else if (component.ToLower().Equals("cl"))
+                            unit = "cl";
+                        else if (component.ToLower().Equals("shot") || component.ToLower().Equals("shots"))
+                            unit = "shot";
+                        else if (component.ToLower().Equals("part") || component.ToLower().Equals("parts"))
+                            unit = "part";
+                    }
+
+                    double amountInMl;
+                    switch (unit)
+                    {
+                        case "oz":
+                            amountInMl = value * 28.41306;
+                            break;
+                        case "cup":
+                            amountInMl = value * 284.1306;
+                            break;
+                        case "tsp":
+                            amountInMl = value * 5.919388;
+                            break;
+                        case "tbsp":
+                            amountInMl = value * 17.75816;
+                            break;
+                        case "juice":
+                            amountInMl = value * 71.03266;
+                            break;
+                        case "dash":
+                            amountInMl = value * 1.0;
+                            break;
+                        case "cl":
+                            amountInMl = value * 10.0;
+                            break;
+                        case "shot":
+                            amountInMl = value * 44.0;
+                            break;
+                        case "part":
+                            amountInMl = value * 1.0;
+                            break;
+                        default:
+                            amountInMl = value * 1.0;
+                            break;
+                    }
+
+                    measurementsInMl.Add(amountInMl);
+                }
+            }
+
+            return measurementsInMl;
         }
     }
 }
