@@ -350,6 +350,9 @@ namespace BreathNDrinkClassLibrary
                 measurementNo++;
             }
 
+            if (totalAlcVol == 0.0)
+                return -1.0;
+
             return totalAlcVol / totalVol;
         }
 
