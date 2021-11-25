@@ -165,9 +165,6 @@ namespace BreathNDrinkClassLibrary
                     case "campari":
                         alcoholByVol = 0.25;
                         break;
-                    case "sweet vermouth":
-                        alcoholByVol = 0.16;
-                        break;
                     case "vodka":
                     case "absolut vodka":
                         alcoholByVol = 0.4;
@@ -203,6 +200,8 @@ namespace BreathNDrinkClassLibrary
                         alcoholByVol = 0.245;
                         break;
                     case "dry vermouth":
+                    case "sweet vermouth":
+                    case "vermouth":
                         alcoholByVol = 0.18;
                         break;
                     case "blackberry brandy":
@@ -249,7 +248,15 @@ namespace BreathNDrinkClassLibrary
                         alcoholByVol = 0.43;
                         break;
                     case "peach schnapps":
+                    case "strawberry schnapps":
+                    case "peachtree schnapps":
                         alcoholByVol = 0.2;
+                        break;
+                    case "lager":
+                        alcoholByVol = 0.05;
+                        break;
+                    case "cider":
+                        alcoholByVol = 0.05;
                         break;
                     case "red wine":
                         alcoholByVol = 0.14;
@@ -265,6 +272,55 @@ namespace BreathNDrinkClassLibrary
                         break;
                     case "vanilla vodka":
                         alcoholByVol = 0.375;
+                        break;
+                    case "beer":
+                        alcoholByVol = 0.05;
+                        break;
+                    case "prosecco":
+                        alcoholByVol = 0.11;
+                        break;
+                    case "lillet blanc":
+                        alcoholByVol = 0.17;
+                        break;
+                    case "gold rum":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "pernod":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "rose":
+                        alcoholByVol = 0.125;
+                        break;
+                    case "pastis":
+                    case "ricard":
+                        alcoholByVol = 0.45;
+                        break;
+                    case "peychaud bitters":
+                        alcoholByVol = 0.35;
+                        break;
+                    case "brandy":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "cognac":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "cointreau":
+                        alcoholByVol = 0.4;
+                        break;
+                    case "cherry brandy":
+                        alcoholByVol = 0.25;
+                        break;
+                    case "goldschlager":
+                        alcoholByVol = 0.25;
+                        break;
+                    case "white creme de menthe":
+                        alcoholByVol = 0.24;
+                        break;
+                    case "creme de mure":
+                        alcoholByVol = 0.18;
+                        break;
+                    case "rye whiskey":
+                        alcoholByVol = 0.46;
                         break;
                     default:
                         alcoholByVol = 0.0;
