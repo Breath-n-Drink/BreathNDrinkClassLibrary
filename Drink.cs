@@ -139,6 +139,9 @@ namespace BreathNDrinkClassLibrary
             {
                 return CalculateRating();
             }
+            set
+            {
+            }
         }
 
         public void AddIngredientAndMeasurement(string ingredient, string measurement)
@@ -147,7 +150,10 @@ namespace BreathNDrinkClassLibrary
             _measurementList.Add(measurement);
         }
 
+        public void addRating(int value, int sessionId)
+        {
 
+        }
 
         private double CalculateAlcoholPercentage()
         {
@@ -483,14 +489,20 @@ namespace BreathNDrinkClassLibrary
         private double CalculateRating()
         {
             List<Ratings> ratings = _context.Ratings.Where(r => r.DrinkId.Equals(int.Parse(_drinkId))).ToList();
-            
-            int total = 0;
-            foreach (Ratings rating in ratings)
+
+            if (ratings.Count > 0)
             {
-                total += rating.RatingValue;
+                int total = 0;
+
+                foreach (Ratings rating in ratings)
+                {
+                    total += rating.RatingValue;
+                }
+
+                return total / (double)ratings.Count;
             }
 
-            return total / (double)ratings.Count;
+            return 0.0;
         }
     }
 }
