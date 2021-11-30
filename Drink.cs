@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BreathNDrinkClassLibrary.Models;
 
 namespace BreathNDrinkClassLibrary
 {
@@ -15,6 +16,7 @@ namespace BreathNDrinkClassLibrary
         private string _imgThumbUrl;
         private List<string> _ingredientList = new();
         private List<string> _measurementList = new();
+        private BreathndrinkContext _context = new BreathndrinkContext();
 
         public string DrinkId
         {
@@ -131,11 +133,21 @@ namespace BreathNDrinkClassLibrary
             }
         }
 
+        public double Rating
+        {
+            get
+            {
+                return CalculateRating();
+            }
+        }
+
         public void AddIngredientAndMeasurement(string ingredient, string measurement)
         {
             _ingredientList.Add(ingredient);
             _measurementList.Add(measurement);
         }
+
+
 
         private double CalculateAlcoholPercentage()
         {
@@ -466,6 +478,19 @@ namespace BreathNDrinkClassLibrary
             }
 
             return measurementsInMl;
+        }
+
+        private double CalculateRating()
+        {
+            List<Ratings> ratings = _context.Ratings.Where(r => r.DrinkId.Equals(int.Parse(_drinkId))).ToList();
+            
+            int total = 0;
+            foreach (Ratings rating in ratings)
+            {
+                total += rating.RatingValue;
+            }
+
+            return total / (double)ratings.Count;
         }
     }
 }
