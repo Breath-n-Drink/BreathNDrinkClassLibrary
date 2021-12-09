@@ -1,9 +1,9 @@
-﻿using System;
+﻿using BreathNDrinkAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BreathNDrinkClassLibrary.Models;
 
 namespace BreathNDrinkClassLibrary
 {
@@ -16,7 +16,12 @@ namespace BreathNDrinkClassLibrary
         private string _imgThumbUrl;
         private List<string> _ingredientList = new();
         private List<string> _measurementList = new();
-        private BreathndrinkContext _context = new BreathndrinkContext();
+        private List<Ratings> _ratings = new();
+
+        public Drink(List<Ratings> ratings)
+        {
+            _ratings = new List<Ratings>(ratings);
+        }
 
         public string DrinkId
         {
@@ -148,11 +153,6 @@ namespace BreathNDrinkClassLibrary
         {
             _ingredientList.Add(ingredient);
             _measurementList.Add(measurement);
-        }
-
-        public void addRating(int value, int sessionId)
-        {
-
         }
 
         private double CalculateAlcoholPercentage()
@@ -488,18 +488,18 @@ namespace BreathNDrinkClassLibrary
 
         private double CalculateRating()
         {
-            List<Ratings> ratings = _context.Ratings.Where(r => r.DrinkId.Equals(int.Parse(_drinkId))).ToList();
+            //List<Ratings> ratings = _context.Ratings.Where(r => r.DrinkId.Equals(int.Parse(_drinkId))).ToList();
 
-            if (ratings.Count > 0)
+            if (_ratings.Count > 0)
             {
                 int total = 0;
 
-                foreach (Ratings rating in ratings)
+                foreach (Ratings rating in _ratings)
                 {
                     total += rating.RatingValue;
                 }
 
-                return total / (double)ratings.Count;
+                return total / (double)_ratings.Count;
             }
 
             return 0.0;
